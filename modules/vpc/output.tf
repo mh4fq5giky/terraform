@@ -1,3 +1,11 @@
+output "ProjectPrefix" {
+  value = var.PJPrefix
+}
+
+output "Environment" {
+  value = var.Environment
+}
+
 output "vpc_id" {
   value = aws_vpc.vpc.id
 }

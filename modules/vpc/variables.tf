@@ -1,4 +1,4 @@
-variable "project_name" {
+variable "PJPrefix" {
   type        = string
   description = "Project name"
   validation {
