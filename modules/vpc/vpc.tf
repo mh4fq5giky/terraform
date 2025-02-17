@@ -20,8 +20,8 @@ resource "aws_vpc" "vpc" {
   instance_tenancy     = "default"
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-vpc"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-vpc"
+    PJName = var.PJPrefix
   }
 }
 
@@ -33,8 +33,8 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-igw"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-igw"
+    PJName = var.PJPrefix
   }
 }
 
@@ -50,8 +50,8 @@ resource "aws_subnet" "public_subnets" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-Public-Subnet-${each.key}"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-Public-Subnet-${each.key}"
+    PJName = var.PJPrefix
   }
 }
 
@@ -64,8 +64,8 @@ resource "aws_subnet" "private_subnets" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-Private-Subnet-${each.key}"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-Private-Subnet-${each.key}"
+    PJName = var.PJPrefix
   }
 }
 
@@ -78,8 +78,8 @@ resource "aws_subnet" "rdsprivate_subnets" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-RDSPrivate-Subnet-${each.key}"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-RDSPrivate-Subnet-${each.key}"
+    PJName = var.PJPrefix
   }
 }
 
@@ -90,8 +90,8 @@ resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-Public-rtb"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-Public-rtb"
+    PJName = var.PJPrefix
   }
 }
 
@@ -99,8 +99,8 @@ resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-Private-rtb"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-Private-rtb"
+    PJName = var.PJPrefix
   }
 }
 
@@ -108,8 +108,8 @@ resource "aws_route_table" "rdsprivate_route_table" {
   vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-RDSPrivate-rtb"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-RDSPrivate-rtb"
+    PJName = var.PJPrefix
   }
 }
 
@@ -159,8 +159,8 @@ resource "aws_eip" "ngwip" {
   domain = "vpc"
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-ngw-eip"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-ngw-eip"
+    PJName = var.PJPrefix
   }
 }
 
@@ -171,8 +171,8 @@ resource "aws_nat_gateway" "private" {
   depends_on    = [aws_eip.ngwip]
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-ngw"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-ngw"
+    PJName = var.PJPrefix
   }
 }
 
@@ -186,7 +186,7 @@ resource "aws_vpc_endpoint" "s3" {
   route_table_ids = [aws_route_table.public_route_table.id]
 
   tags = {
-    Name   = "${var.project_name}-${var.environment}-S3Endpoint"
-    PJName = var.project_name
+    Name   = "${var.PJPrefix}-${var.environment}-S3Endpoint"
+    PJName = var.PJPrefix
   }
 }

@@ -1,11 +1,19 @@
 variable "project_name" {
   type        = string
   description = "Project name"
+  validation {
+    condition     = length(var.PJPrefix) >= 1 && length(var.PJPrefix) <= 12 && can(regex("[a-z0-9]+", var.PJPrefix))
+    error_message = "Must contain only lowercase letters and numbers."
+  }
 }
 
 variable "environment" {
   type        = string
   description = "Deployment environment (e.g., dev, stg, prd)"
+  validation {
+    condition     = var.Environment == "dev" || var.Environment == "stg" || var.Environment == "prd"
+    error_message = "Must be one of: dev, stg, prd."
+  }
 }
 
 variable "aws_region" {
